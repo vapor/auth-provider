@@ -15,15 +15,15 @@ private let sessionEntityId = "session-entity-id"
 
 extension SessionPersistable where Self: Entity {
     public func persist(for req: Request) throws {
-        try req.session().data.set(sessionEntityId, id)
+        try req.session().data.set(sessionEntityId + "-\(Self.self)", id)
     }
     
     public func unpersist(for req: Request) throws {
-        try req.session().data.set(sessionEntityId, nil)
+        try req.session().data.set(sessionEntityId + "-\(Self.self)", nil)
     }
     
     public static func fetchPersisted(for request: Request) throws -> Self? {
-        guard let id = try request.session().data[sessionEntityId] else {
+        guard let id = try request.session().data[sessionEntityId + "-\(Self.self)"] else {
             return nil
         }
         

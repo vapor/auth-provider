@@ -1,7 +1,7 @@
 import Vapor
 
 extension BCryptHasher: PasswordVerifier {
-    public func verify(password: String, matchesHash: String) throws -> Bool {
-        return try check(password.bytes, matchesHash: matchesHash.bytes)
+    public func verify(password: Bytes, matches hash: Bytes) throws -> Bool {
+        return try check(password, matchesHash: hash)
     }
 }
